@@ -37,3 +37,5 @@
 (string->vec "hello\nworld")
 (use 'site.core :reload)
 (read-css)
+(use 'site.core :reload)
+(navigation-item { :url "hi" :title "there" })
