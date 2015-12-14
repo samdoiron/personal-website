@@ -59,8 +59,9 @@
 ;;; items: { :url url, :title title }
 (defn navigation [items]
   [:nav.primary-navigation
+   [:div.primary-navigation-shadow
     [:h1.primary-navigation-title "Sam Doiron"]
-    (map navigation-item items)])
+    (map navigation-item items)]])
 
 (defn image-style [img]
   (str 
@@ -72,13 +73,19 @@
        [:h1.article-title (:title art)]])
 
 (defn articles [arts]
-  [:div.articles (map article arts)])
+  [:div.articles 
+   (navigation [{ :url "#" :title "Projects" }
+                { :url "#" :title "Blog" }
+                { :url "#" :title "Resume" }])
+   (splash)
+   (map article arts)])
 
 (defn splash []
   [:div.splash
-  [:img.splash-me { "src" "http://avatars2.githubusercontent.com/u/3770220?v=3&s=460" }]
-   [:h1.splash-title 
-    "Hi, I'm Sam Doiron!"]
+   [:div.splash-greeting
+     [:img.splash-me { "src" "http://avatars2.githubusercontent.com/u/3770220?v=3&s=460" }]
+     [:h1.splash-title 
+      "Hi, I'm Sam Doiron!"]]
    [:p.splash-body "I'm a "
                 [:span.computer-programmer "Computer Programmer"]
                 " studying Computer Science at "
@@ -97,10 +104,6 @@
   (basic-page 
     "Front page" 
     [:body
-     (navigation [{ :url "#" :title "Projects" }
-                  { :url "#" :title "Blog" }
-                  { :url "#" :title "Resume" }])
-     (splash)
      (articles (take 10 
                      (repeat { :title "A Brief Review of Clojure" })))]))
 
