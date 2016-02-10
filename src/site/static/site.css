@@ -69,7 +69,7 @@ h1 {
 .design,
 .software-architecture,
 .oxford-comma {
-  font-weight: normal;
+  font-weight: bold;
 }
 
 .comma.active {
@@ -153,7 +153,7 @@ h1 {
 
 .article {
   border-radius: 2px;
-  box-shadow: 0px 2px 10px 0px rgba(0,0,0,.15);
+  box-shadow: 0px 3px 8px 0px rgba(0,0,0,.25);
 
   flex-shrink: 1;
 
