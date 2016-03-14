@@ -7,6 +7,8 @@
                  [org.clojure/clojure "1.7.0"]
                  [ring "1.4.0"]
                  [hiccup "1.0.5"]
+                 [markdown-clj "0.9.86"]
+                 [clj-toml "0.3.1"]
                 ]
   :main ^:skip-aot site.core
   :target-path "target/%s"
