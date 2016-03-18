@@ -6,13 +6,9 @@
          '[ring.middleware.reload :refer [wrap-reload]]
          '[ring.middleware.stacktrace :refer [wrap-stacktrace]]
          '[ring.util.response :as r]
-         '[markdown.core :as markdown]
          '[clojure.string :as str]
+         '[site.views :as views]
          '[clj-toml.core :as toml])
-
-
-(defn styles []
-  [:style (slurp "static/site.css")])
 
 (defn default [a b]
   (if (nil? a) b a))
@@ -81,25 +77,8 @@
 (defn load-articles []
   (map load-article (list-articles)))
 
-(defn article-view [article]
-  [:article.article
-   [:style (:style article)]
-   [:script (:script article)]
-   (markdown/md-to-html-string (:content article))
-   ])
-
-(defn front-page []
-  (h/html
-    [:html
-     [:head
-      (styles)
-      [:title "Hello"]]
-     [:body
-     (map article-view (load-articles))
-     ]]))
-
 (defn hello-handler [request]
-  (-> (r/response (front-page))
+  (-> (r/response (views/front-page (load-articles)))
       (r/content-type "text/html")))
 
 (def reloadable-app
