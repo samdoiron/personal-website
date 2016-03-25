@@ -23,3 +23,7 @@ dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
 pom.properties
+
+# Javascript
+node_modules
+bower_components
