@@ -5,7 +5,7 @@ var gulp = require('gulp'),
   cleanCss = require('gulp-clean-css');
 
 var paths = {
-  styles: ['static/styles/**/*.scss']
+  styles: ['resources/styles/**/*.scss']
 }
 
 gulp.task('styles', function () {
@@ -15,7 +15,7 @@ gulp.task('styles', function () {
     .pipe(autoprefixer({
       browsers: ['last 2 versions']
     }))
-    .pipe(gulp.dest('static/'))
+    .pipe(gulp.dest('resources/'))
     .pipe(livereload());
 });
 

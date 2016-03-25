@@ -6,9 +6,11 @@ $break-desktop: 900px;
 // Colors
 //
 
-$navigation-background-color: white;
-$body-background-color: #ddd;
-$content-background-color: #fefefe;
+$cold-white: #fcfcff;
+
+$navigation-background-color: $cold-white;
+$body-background-color: #dddddf;
+$content-background-color: $cold-white;
 
 $major-division-border-color: #ccc;
 $minor-division-border-color: lighten($major-division-border-color, 15%);
@@ -49,8 +51,13 @@ body {
   font-size: 14px;
 
   @media screen and (min-width: $break-tablet) {
-    font-size: 18px;
+    font-size: 25px;
   }
+
+  @media screen and (min-width: $break-desktop) {
+    font-size: 16px;
+  }
+
   overflow-x: hidden;
 }
 
@@ -83,7 +90,6 @@ a:focus {
 // Navigation bar
 .l-navigation {
   position: relative;
-  background: gray;
   z-index: 10;
 }
 
@@ -91,6 +97,7 @@ a:focus {
 .l-main {
   position: relative;
   height: calc(100vh - 2.5rem;);
+  padding-top: .5rem;
 }
 
 
@@ -110,14 +117,14 @@ $navigation-height: 2.5rem;
   font-size: 1.2rem;
   color: #555;
 
-  background: white;
+  background: $navigation-background-color;
 }
 
 .navigation-item,
 .navigation-logo {
   @extend .vertical-center;
-
   display: inline-block;
+
   padding-top: .5rem;
   padding-bottom: .5rem;
   padding-right: .75rem;
@@ -130,7 +137,8 @@ $navigation-height: 2.5rem;
   color: #444;
 
   &:hover {
-    text-shadow: -1px 0px red, 1px 0px cyan;
+    // Fake chromatic abberation
+    text-shadow: -2px 0px red, 2px 0px cyan;
   }
 }
 
@@ -159,7 +167,6 @@ $navigation-height: 2.5rem;
 //
 .articleListing {
   height: 100%;
-  padding-top: .5rem;
 }
 
 $article-item-height: 5rem;
@@ -225,4 +232,41 @@ $article-item-height: 5rem;
     height: 100%;
     width: 100%;
   }
+}
+
+//
+// Full-article
+//
+
+.article {
+    position: relative;
+
+    margin-top: 1rem;
+    background: $content-background-color;
+    padding: 1.2rem;
+
+    line-height: 1.4;
+
+    font-size: 1.2rem;
+    font-family: sans-serif;
+
+    max-width: 60ch;
+    margin: 0 auto;
+}
+
+.article img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 100%;
+}
+
+.article h2 {
+    color: #222;
+}
+
+.article-title {
+    font-family: sans-serif;
+    font-size: 1.8rem;
+    font-weight: bold;
 }

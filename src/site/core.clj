@@ -1,14 +1,15 @@
 (ns site.core
-  (:gen-class))
-
-(require '[ring.adapter.jetty :as ring-jetty]
-         '[hiccup.core :as h]
-         '[ring.middleware.reload :refer [wrap-reload]]
-         '[ring.middleware.stacktrace :refer [wrap-stacktrace]]
-         '[ring.util.response :as r]
-         '[clojure.string :as str]
-         '[site.views :as views]
-         '[clj-toml.core :as toml])
+  (:require [ring.adapter.jetty :as ring-jetty]
+            [hiccup.core :as h]
+            [ring.middleware.reload :refer [wrap-reload]]
+            [ring.middleware.stacktrace :refer [wrap-stacktrace]]
+            [ring.util.response :as r]
+            [clojure.string :as str]
+            [site.views :as views]
+            [clj-toml.core :as toml]
+            [compojure.core :refer :all]
+            [compojure.route :as route]
+  (:gen-class)))
 
 (defn default [a b]
   (if (nil? a) b a))
@@ -22,10 +23,10 @@
         [path]))))
 
 (defn list-articles []
-   (ls "static/articles"))
+   (ls "resources/articles"))
 
 (defn name->path [article-name]
-  (str/join ["static/articles/" article-name]))
+  (str/join ["resources/articles/" article-name]))
 
 (defn parse-toml [string]
   (toml/parse-string string))
@@ -52,6 +53,7 @@
 (defn load-custom-style [article-name]
   (load-article-file article-name "style.css"))
 
+;;; Article text contains metadata, above a "~~~" marker.
 (defn split-content-and-meta [article-text]
   (let [sections (str/split article-text #"~~~")]
     (if (= 1 (count sections))
@@ -60,29 +62,39 @@
 
 (def parse-metadata parse-toml)
 
-(defn load-content [article-name]
+(defn load-article-content [article-name]
   (let [file-content (load-article-file article-name "content.md")
         [content metadata] (split-content-and-meta file-content)]
     [content (parse-metadata metadata)]))
 
-(defn load-article [article-name]
-  (let [[content metadata] (load-content article-name)]
-    {:name article-name
+(defn load-article [slug]
+  (let [[content metadata] (load-article-content slug)]
+    {:title (get metadata "title")
+     :slug slug
      :content content
      :metadata metadata
-     :script (load-custom-script article-name)
-     :style (load-custom-style article-name)
+     :script (load-custom-script slug)
+     :style (load-custom-style slug)
      }))
 
 (defn load-articles []
   (map load-article (list-articles)))
 
-(defn hello-handler [request]
-  (-> (r/response (views/front-page (load-articles)))
+(defn view-articles-list []
+  (-> (r/response (views/articles-list (load-articles)))
       (r/content-type "text/html")))
 
+(defn view-article [slug]
+  (views/article (load-article slug)))
+
+(defroutes app-routes
+  (GET "/" [] "you are lost, my child")
+  (GET "/articles" [] (view-articles-list))
+  (GET "/article/:slug" [slug] (view-article slug))
+  (route/resources "/"))
+
 (def reloadable-app
-  (-> #'hello-handler
+  (-> #'app-routes
       wrap-reload
       wrap-stacktrace))
 
