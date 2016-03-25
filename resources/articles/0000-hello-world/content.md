@@ -12,6 +12,10 @@ the hard work that has gone into it's construction, but at the same time
 I think that there are many flaws which prevent me from recommending it
 to anyone.
 
+1. Everyone loves ordered lists, right?
+2. Especially children
+3. And the elderly
+
 Ember.js is not a good web framework. I don't mean to disregard
 the hard work that has gone into it's construction, but at the same time
 I think that there are many flaws which prevent me from recommending it
