@@ -38,7 +38,7 @@
 (defn- article-listing-item [article]
   [:a.articleListing-item {"href" (link-to article)}
    [:div.articleListing-item-flair
-     [:img {"src" "/js.png" "alt" "javascript"}]]
+     [:img {"src" "//c.tadst.com/gfx/750w/sunrise-sunset-sun-calculator.jpg?1" "alt" "javascript"}]]
    [:div.articleListing-item-details
      [:h1.articleListing-item-title (:title article)]
      [:span.articleListing-item-date "13 Feb 2015"]
