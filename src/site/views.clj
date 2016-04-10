@@ -4,6 +4,9 @@
             [hiccup.page :as h]
             [markdown.core :as markdown-clj]))
 
+(def coming-soon
+  [:span.comingSoon "Coming soon"])
+
 (defn- styles []
   [:style (slurp "resources/site.css")])
 
@@ -35,26 +38,24 @@
 (defn- link-to [article]
   (str "/article/" (:slug article)))
 
-(defn- article-listing-item [article]
-  [:a.articleListing-item {"href" (link-to article)}
-   [:div.articleListing-item-flair
+(defn- article-preview [article]
+  [:a.articlePreview {"href" (link-to article)}
+   [:div.articlePreview-flair
      [:img {"src" "//c.tadst.com/gfx/750w/sunrise-sunset-sun-calculator.jpg?1" "alt" "javascript"}]]
-   [:div.articleListing-item-details
-     [:h1.articleListing-item-title (:title article)]
-     [:span.articleListing-item-date "13 Feb 2015"]
+   [:div.articlePreview-details
+     [:h1.articlePreview-title (:title article)]
+     [:span.articlePreview-date "13 Feb 2015"]
    ]])
 
 (defn- article-listing [articles]
   [:div.articleListing
-   (map article-listing-item (flatten (take 25 (repeat articles))))])
+   (map article-preview (flatten (take 25 (repeat articles))))])
 
 
 (defn- basic-page [main]
   (h/html5 {"lang" "en"}
     (head)
     [:body
-     [:script {"src" "//cdn.jsdelivr.net/hyphenator/4.3.0/hyphenator.min.js"}]
-     [:script "Hyphenator.run()"]
       [:nav.l-navigation navigation]
       [:main.l-main main]]))
 
@@ -75,6 +76,7 @@
      [:span.welcomeHero-highlight "Software Architecture"] "."]
     ]])
 
+
 ;;;; Public
 
 (defn front-page [articles]
@@ -82,11 +84,26 @@
     [:div
       welcome-hero
       [:div.cardGroup
-        [:div.cardGroup-card "Resume"]
-        [:div.cardGroup-card "Articles"]
-        [:div.cardGroup-card "Projects"]]
-      ]
-    ))
+        [:div.cardGroup-card 
+         [:div.cardGroup-card-titles
+           [:h1 "Articles"]
+           [:h2 "/ most recent"]]
+           (map article-preview (take 3 articles))
+         ]
+        [:div.cardGroup-card
+         [:div.cardGroup-card-titles
+           [:h1 "Projects"]
+           [:h2 "/ most recent"]]
+           coming-soon
+         ]
+        [:div.cardGroup-card
+         [:div.cardGroup-card-titles
+           [:h1 "Resume"]
+           [:h2 "/ with diacritics"]]
+           coming-soon
+         ]
+        ]
+      ]))
 
 ;;; View the full content of an article, on a dedicated page
 (defn article [art]

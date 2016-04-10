@@ -34,7 +34,9 @@ nav li {
   margin: 0;
 }
 
-h1 {
+h1,
+h2,
+h3 {
   margin: 0;
   padding: 0;
 }
@@ -46,6 +48,15 @@ p:last-child {
 ::selection {
     background: $accent-color;
     color: $cold-white;
+}
+
+@mixin drop-shadow() {
+  box-shadow: 0px 2px 5px rgba(0,0,0,.125);
+}
+
+.comingSoon {
+  color: #888;
+  font-style: italic;
 }
 
 html,
@@ -179,6 +190,8 @@ $front-page-width: 50rem;
 // Welcome hero
 //
 .welcomeHero {
+  @include drop-shadow();
+
   position: relative;
 
   max-width: $front-page-width;
@@ -230,12 +243,50 @@ $front-page-width: 50rem;
 }
 
 .cardGroup-card {
+  @include drop-shadow();
+
   background: $cold-white;
-  height: 15rem;
   max-width: 30rem;
   margin-bottom: 1rem;
   margin-left: auto;
   margin-right: auto;
+  padding: .5rem;
+
+  text-align: left;
+}
+
+.cardGroup-card-titles {
+  margin-bottom: .25rem;
+
+  h1,
+  h2 {
+    display: inline-block;
+    vertical-align: middle
+  }
+
+  h1 {
+    font-size: 1.5rem;
+    color: #666;
+  }
+
+  h2 {
+    padding: .5rem;
+    font-size: 1rem;
+    color: #777;
+    font-weight: normal;
+  }
+}
+
+//
+// Article preview
+//
+.articlePreview {
+}
+
+.articlePreview-title {
+}
+
+.articlePreview-body {
 }
 
 //
@@ -243,11 +294,16 @@ $front-page-width: 50rem;
 //
 .articleListing {
   height: 100%;
+  @media screen and (min-width: $break-desktop) {
+    margin-left: auto;
+    margin-right: auto;
+    width: $site-column-width;
+  }
 }
 
 $article-item-height: 5rem;
 
-.articleListing-item {
+.articlePreview {
   @extend .vertical-center-parent;
 
   position: relative;
@@ -259,27 +315,23 @@ $article-item-height: 5rem;
   overflow: hidden;
 
   background: $content-background-color;
-  border-bottom: 1px solid $minor-division-border-color;
+
+  &:not(:first-of-type) {
+    border-top: 1px solid $minor-division-border-color;
+  }
 
   &:hover {
-    .articleListing-item-title {
+    .articlePreview-title {
         color: $accent-color;
     }
   }
 
   &:active {
     background: $active-color;
-
-  }
-
-  @media screen and (min-width: $break-desktop) {
-      margin-left: auto;
-      margin-right: auto;
-      width: $site-column-width;
   }
 }
 
-.articleListing-item-title {
+.articlePreview-title {
   display: block;
   vertical-align: top;
 
@@ -291,7 +343,7 @@ $article-item-height: 5rem;
   font-weight: normal;
 }
 
-.articleListing-item-date {
+.articlePreview-date {
   display: block;
 
   font-size: 0.8rem;
@@ -299,13 +351,13 @@ $article-item-height: 5rem;
   margin-top: .5rem;
 }
 
-.articleListing-item-details {
+.articlePreview-details {
   @extend .vertical-center;
 
   padding-left: .5rem;
 }
 
-.articleListing-item-flair {
+.articlePreview-flair {
   @extend .vertical-center;
 
   display: inline-block;
@@ -329,23 +381,25 @@ $article-item-height: 5rem;
 //
 
 .article {
-    position: relative;
+  @include drop-shadow();
 
-    background: $content-background-color;
-    padding: 1.5rem;
+  position: relative;
 
-    line-height: 1.58;
+  background: $content-background-color;
+  padding: 1.5rem;
 
-    font-size: 1rem;
-    font-family: sans-serif;
+  line-height: 1.58;
 
-    max-width: 60ch;
-    margin: 0 auto;
+  font-size: 1rem;
+  font-family: sans-serif;
 
-    @media screen and (min-width: $break-desktop) {
-      padding-left: 2.5em;
-      padding-right: 2.5em;
-    }
+  max-width: 60ch;
+  margin: 0 auto;
+
+  @media screen and (min-width: $break-desktop) {
+    padding-left: 2.5em;
+    padding-right: 2.5em;
+  }
 }
 
 .article img {
@@ -378,8 +432,9 @@ $article-item-height: 5rem;
 }
 
 .article-title {
-    font-family: sans-serif;
-    font-size: 1.8rem;
-    font-weight: bold;
+  color: #444;
+  font-family: sans-serif;
+  font-size: 1.8rem;
+  font-weight: bold;
 }
 
