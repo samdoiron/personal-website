@@ -1,6 +1,7 @@
 $break-tablet: 600px;
 $break-desktop: 900px;
-$break-ultrawide: 2000px;
+$break-ultrawide-width: 2000px;
+$break-ultrawide-height: 1600px;
 
 //
 // Colors
@@ -16,6 +17,11 @@ $major-division-border-color: #ccc;
 $minor-division-border-color: lighten($major-division-border-color, 15%);
 
 $active-color: #eee;
+
+$site-column-width: 65ch;
+
+$flat-red: #e74c3c;
+$accent-color: $flat-red;
 
 * {
   box-sizing: border-box;
@@ -38,7 +44,7 @@ p:last-child {
 }
 
 ::selection {
-    background: red;
+    background: $accent-color;
     color: $cold-white;
 }
 
@@ -63,7 +69,8 @@ body {
     font-size: 16px;
   }
 
-  @media screen and (min-width: $break-ultrawide) {
+  @media screen and (min-width: $break-ultrawide-width),
+         screen and (min-height: $break-ultrawide-height) {
       font-size: 2vh;
   }
 
@@ -108,6 +115,9 @@ a:focus {
   min-height: calc(100vh - 2.5rem;);
   padding-top: .5rem;
   padding-bottom: .5rem;
+  max-width: 50rem;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 
@@ -140,6 +150,14 @@ $navigation-height: 2.5rem;
   padding-right: .75rem;
   padding-left: .75rem;
   cursor: pointer;
+
+  &,
+  &:visited,
+  &:active,
+  &:focus {
+    text-decoration: none;
+    color: inherit;
+  }
 }
 
 .navigation-logo {
@@ -151,25 +169,74 @@ $navigation-height: 2.5rem;
   }
 }
 
-.navigation-item {
-  &:hover {
-    color: red;
+.navigation-item:hover {
+  color: $accent-color !important;
+}
+
+$front-page-width: 50rem;
+
+//
+// Welcome hero
+//
+.welcomeHero {
+  position: relative;
+
+  max-width: $front-page-width;
+  padding: 1rem;
+
+  background: $cold-white;
+  margin-bottom: 1rem;
+}
+
+.welcomeHero-picture,
+.welcomeHero-text {
+  vertical-align: middle;
+}
+
+.welcomeHero-picture {
+  display: none;
+
+  @media screen and (min-width: $break-desktop) {
+    display: inline-block;
+    width: 20%;
+    padding-right: 1rem;
   }
 }
 
-//
-// Card
-//
-.card {
-  background: white;
-  border-bottom: 2px solid rgba(0,0,0,.2);
-
-  border-top-left-radius: 2px;
-  border-top-right-radius: 2px;
-  border-bottom-left-radius: 3px;
-  border-bottom-right-radius: 3px;
+.welcomeHero-text {
+  @media screen and (min-width: $break-desktop) {
+    display: inline-block;
+    width: 80%;
+  }
 }
 
+.welcomeHero-title {
+  color: #555;
+}
+
+.welcomeHero-highlight {
+  color: $flat-red;
+  font-weight: bold;
+}
+
+
+//
+// Card group
+//
+.cardGroup {
+  text-align: center;
+  padding-left: .5rem;
+  padding-right: .5rem;
+}
+
+.cardGroup-card {
+  background: $cold-white;
+  height: 15rem;
+  max-width: 30rem;
+  margin-bottom: 1rem;
+  margin-left: auto;
+  margin-right: auto;
+}
 
 //
 // Articles
@@ -196,7 +263,7 @@ $article-item-height: 5rem;
 
   &:hover {
     .articleListing-item-title {
-        color: red;
+        color: $accent-color;
     }
   }
 
@@ -208,7 +275,7 @@ $article-item-height: 5rem;
   @media screen and (min-width: $break-desktop) {
       margin-left: auto;
       margin-right: auto;
-      width: 40rem;
+      width: $site-column-width;
   }
 }
 
@@ -265,18 +332,19 @@ $article-item-height: 5rem;
     position: relative;
 
     background: $content-background-color;
-    padding: 1.2rem;
+    padding: 1.5rem;
 
-    line-height: 1.4;
+    line-height: 1.58;
 
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-family: sans-serif;
 
-    max-width: 65ch;
+    max-width: 60ch;
     margin: 0 auto;
 
     @media screen and (min-width: $break-desktop) {
-        padding: 2rem;
+      padding-left: 2.5em;
+      padding-right: 2.5em;
     }
 }
 
@@ -289,7 +357,7 @@ $article-item-height: 5rem;
 }
 
 .article a {
-    color: red;
+    color: $accent-color;
 }
 
 .article h1,
@@ -314,3 +382,4 @@ $article-item-height: 5rem;
     font-size: 1.8rem;
     font-weight: bold;
 }
+

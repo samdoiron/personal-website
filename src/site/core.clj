@@ -87,8 +87,11 @@
 (defn view-article [slug]
   (views/article (load-article slug)))
 
+(defn view-front-page []
+  (views/front-page (load-articles)))
+
 (defroutes app-routes
-  (GET "/" [] "you are lost, my child")
+  (GET "/" [] (view-front-page))
   (GET "/articles" [] (view-articles-list))
   (GET "/article/:slug" [slug] (view-article slug))
   (route/resources "/"))
