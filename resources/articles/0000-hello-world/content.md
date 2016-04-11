@@ -1,6 +1,8 @@
 title = "Uncertainty, lies, and Ember.js"
 date = "2016-01-01"
-~~~
+
+---
+
 This is an article, and it has
 
 + bullet-points

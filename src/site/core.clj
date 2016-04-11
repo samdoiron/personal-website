@@ -55,7 +55,7 @@
 
 ;;; Article text contains metadata, above a "~~~" marker.
 (defn split-content-and-meta [article-text]
-  (let [sections (str/split article-text #"~~~")]
+  (let [sections (str/split article-text #"\n---\n")]
     (if (= 1 (count sections))
       [(first sections) {}]
       [(second sections) (first sections)])))
