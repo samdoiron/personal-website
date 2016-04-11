@@ -239,6 +239,14 @@ $navigation-height: 2.5rem;
   text-align: center;
   margin-left: .5rem;
   margin-right: .5rem;
+
+  @media screen and (min-width: $break-desktop) {
+    // Even better for new browsers!
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    margin: 0;
+  }
 }
 
 .cardGroup-card {
@@ -255,6 +263,7 @@ $navigation-height: 2.5rem;
 
   @media screen and (min-width: $break-desktop) {
     display: inline-block;
+
     vertical-align: top;
 
     &:not(:last-child) {
@@ -263,7 +272,7 @@ $navigation-height: 2.5rem;
 
     width: calc(33.33% - 1rem);
   }
-  
+
   // Fix bug on Hi-DPI, tall, and skinny screen (cough Kindle Fire HDX)
   @media screen and (min-height: $break-ultrawide-height) {
     display: block;
@@ -411,7 +420,7 @@ $article-item-height: 5rem;
   font-size: 1rem;
   font-family: sans-serif;
 
-  max-width: 60ch;
+  max-width: 70ch;
   margin: 0 auto;
 
   @media screen and (min-width: $break-desktop) {

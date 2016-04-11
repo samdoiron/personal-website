@@ -98,7 +98,7 @@
          ]
         [:div.cardGroup-card
          [:div.cardGroup-card-titles
-           [:h1 "Resume"]
+           [:h1 "Résumé"]
            [:h2 "/ with diacritics"]]
            coming-soon
          ]
