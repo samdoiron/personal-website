@@ -50,10 +50,6 @@ p:last-child {
     color: $cold-white;
 }
 
-@mixin drop-shadow() {
-  box-shadow: 0px 2px 5px rgba(0,0,0,.125);
-}
-
 .comingSoon {
   color: #888;
   font-style: italic;
@@ -188,8 +184,6 @@ $navigation-height: 2.5rem;
 // Welcome hero
 //
 .welcomeHero {
-  @include drop-shadow();
-
   position: relative;
 
   padding: 1rem;
@@ -250,8 +244,6 @@ $navigation-height: 2.5rem;
 }
 
 .cardGroup-card {
-  @include drop-shadow();
-
   background: $cold-white;
   max-width: 30rem;
   margin-bottom: 1rem;
@@ -408,8 +400,6 @@ $article-item-height: 5rem;
 //
 
 .article {
-  @include drop-shadow();
-
   position: relative;
 
   background: $content-background-color;
