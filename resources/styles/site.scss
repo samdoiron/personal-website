@@ -126,7 +126,7 @@ a:focus {
   min-height: calc(100vh - 2.5rem;);
   padding-top: .5rem;
   padding-bottom: .5rem;
-  max-width: 50rem;
+  max-width: 65rem;
   margin-left: auto;
   margin-right: auto;
 }
@@ -184,8 +184,6 @@ $navigation-height: 2.5rem;
   color: $accent-color !important;
 }
 
-$front-page-width: 50rem;
-
 //
 // Welcome hero
 //
@@ -194,11 +192,12 @@ $front-page-width: 50rem;
 
   position: relative;
 
-  max-width: $front-page-width;
   padding: 1rem;
 
   background: $cold-white;
   margin-bottom: 1rem;
+  margin-left: .5rem;
+  margin-right: .5rem;
 }
 
 .welcomeHero-picture,
@@ -238,8 +237,8 @@ $front-page-width: 50rem;
 //
 .cardGroup {
   text-align: center;
-  padding-left: .5rem;
-  padding-right: .5rem;
+  margin-left: .5rem;
+  margin-right: .5rem;
 }
 
 .cardGroup-card {
@@ -253,6 +252,25 @@ $front-page-width: 50rem;
   padding: .5rem;
 
   text-align: left;
+
+  @media screen and (min-width: $break-desktop) {
+    display: inline-block;
+    vertical-align: top;
+
+    &:not(:last-child) {
+      margin-right: .5rem;
+    }
+
+    width: calc(33.33% - 1rem);
+  }
+  
+  // Fix bug on Hi-DPI, tall, and skinny screen (cough Kindle Fire HDX)
+  @media screen and (min-height: $break-ultrawide-height) {
+    display: block;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 .cardGroup-card-titles {
@@ -406,7 +424,6 @@ $article-item-height: 5rem;
     display: block;
     margin-left: auto;
     margin-right: auto;
-    min-width: 25vw;
     max-width: 100%;
 }
 
